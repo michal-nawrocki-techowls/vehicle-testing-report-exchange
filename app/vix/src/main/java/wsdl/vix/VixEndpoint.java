@@ -38,7 +38,10 @@ public class VixEndpoint {
         declaration.setSafeAndRoadworthyCondition(true);
         declaration.setMadeByName("Michal Nawrocki");
         declaration.setMadeByPosition("Driver");
-
+        Defect d = new Defect();
+        d.setType(DefectType.DANGEROUS);
+        d.setDescription("Flat tire");
+        document.getDefectList().add(d);
         document.setDeclaration(declaration);
         response.setDocument(document);
         return response;
