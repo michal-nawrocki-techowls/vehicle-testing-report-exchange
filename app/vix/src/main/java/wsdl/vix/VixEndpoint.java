@@ -21,6 +21,7 @@ public class VixEndpoint {
         LoginStatus status = f.createLoginStatus();
         status.setStatus(Status.OK);
         status.setSession(request.getToken());
+//        status.setExpires();
         response.setLoginStatus(status);
         return response;
     }
