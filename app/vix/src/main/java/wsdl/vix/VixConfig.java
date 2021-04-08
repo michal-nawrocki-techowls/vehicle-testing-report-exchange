@@ -21,6 +21,8 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class VixConfig extends WsConfigurerAdapter {
 
+	public static final String VIX_NAMESPACE = "http://vix.fleetplanner.co.uk";
+
 	@Override
 	public void addInterceptors(List<EndpointInterceptor> interceptors) {
 		PayloadValidatingInterceptor validator = new PayloadValidatingInterceptor();
@@ -48,7 +50,7 @@ public class VixConfig extends WsConfigurerAdapter {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("VixPort");
 		wsdl11Definition.setLocationUri("/vix");
-		wsdl11Definition.setTargetNamespace("http://wsdl/vix");
+		wsdl11Definition.setTargetNamespace(VIX_NAMESPACE);
 		wsdl11Definition.setSchema(vixSchema);
 		return wsdl11Definition;
 	}

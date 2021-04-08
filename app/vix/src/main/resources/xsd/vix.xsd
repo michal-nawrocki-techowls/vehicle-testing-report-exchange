@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:vix="http://wsdl/vix"
-	targetNamespace="http://wsdl/vix"
+	xmlns:vix="http://vix.fleetplanner.co.uk"
+	targetNamespace="http://vix.fleetplanner.co.uk"
 	elementFormDefault="qualified">
 
 	<xs:element name="LoginRequest">
