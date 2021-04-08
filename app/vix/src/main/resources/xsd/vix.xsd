@@ -56,10 +56,10 @@
 	<xs:complexType name="Document">
 			<xs:sequence>
 				<xs:element name="title" type="xs:string" />
-				<xs:element name="fileGeneratedBy" type="xs:string" />
+				<xs:element name="creator" type="xs:string" />
 				<xs:element name="documentType" type="vix:DocumentType" minOccurs="1"/>
 				<xs:element name="vrm" type="xs:string" />
-				<xs:element name="date" type="xs:date" minOccurs="0"/>
+				<xs:element name="dateTime" type="xs:dateTime" minOccurs="0"/>
 				<xs:element name="fileName" type="xs:string" minOccurs="0"/>
 				<xs:element name="file" type="xs:base64Binary" minOccurs="0"/>
 				<xs:element name="properties">
@@ -72,16 +72,35 @@
 			</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="DocumentExt">
+	<xs:complexType name="SafetyInspection">
 		<xs:complexContent>
 			<xs:extension base="vix:Document">
 				<xs:sequence>
-					<xs:element name="extra" type="xs:string"/>
+					<xs:element name="recordsIncludeAllTheRequirements" type="xs:boolean"/>
+					<xs:element name="allSectionsAreAnswered" type="xs:boolean"/>
+					<xs:element name="containsTwoSignatures" type="xs:boolean"/>
+					<xs:element name="includeConfirmationOfTheRoadworthiness" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Mot">
+		<xs:complexContent>
+			<xs:extension base="vix:Document">
+				<xs:sequence>
+					<xs:element name="initialTestStatus" type="vix:InitialMotTestStatus"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 
+	<xs:simpleType name="InitialMotTestStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PASS" />
+			<xs:enumeration value="PRS" />
+			<xs:enumeration value="FAIL" />
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="DocumentType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="MOT" />

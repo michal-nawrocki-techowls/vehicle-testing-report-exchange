@@ -21,13 +21,13 @@ public class VixEndpoint {
         ObjectFactory f = new ObjectFactory();
         DocumentResponse response = f.createDocumentResponse();
         Document document = f.createDocument();
-        DocumentExt ext = new DocumentExt();
+        SafetyInspection ext = new SafetyInspection();
 
         DocumentListResponse resp = new DocumentListResponse();
 
         ext.setTitle("Hello");
-        ext.setExtra("Extra");
-        response.setDocument((Document) ext);
+       ext.setAllSectionsAreAnswered(true);
+        response.setDocument(ext);
         return response;
     }
 
