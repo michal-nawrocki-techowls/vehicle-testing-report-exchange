@@ -25,7 +25,7 @@ public class VixEndpoint {
         status.setSession(request.getToken());
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTimeZone(TimeZone.getTimeZone("UTC"));
-        status.setExpires(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+        status.setExpiryDateTime(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
         response.setLoginStatus(status);
         return response;
     }
@@ -36,18 +36,12 @@ public class VixEndpoint {
         ObjectFactory f = new ObjectFactory();
         DocumentResponse response = f.createDocumentResponse();
         Document document = f.createDocument();
-        Declaration declaration = f.createDeclaration();
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(new Date());
-        declaration.setDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
-        declaration.setSafeAndRoadworthyCondition(true);
-        declaration.setMadeByName("Michal Nawrocki");
-        declaration.setMadeByPosition("Driver");
-        Defect d = new Defect();
-        d.setType(DefectType.DANGEROUS);
-        d.setDescription("Flat tire");
-        document.getDefectList().add(d);
-        document.setDeclaration(declaration);
+
+       Document.Fields fields = new Document.Fields();
+        Document.Fields.Field field = new Document.Fields.Field();
+       fields.getField().add(field);
+
+
         response.setDocument(document);
         return response;
     }

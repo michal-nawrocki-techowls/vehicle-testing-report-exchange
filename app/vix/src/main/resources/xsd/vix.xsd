@@ -30,7 +30,7 @@
 		<xs:sequence>
 			<xs:element name="status" type="vix:Status" />
 			<xs:element name="session" type="xs:string" minOccurs="0" />
-			<xs:element name="expires" type="xs:dateTime"/>
+			<xs:element name="expiryDateTime" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -40,6 +40,22 @@
 			<xs:enumeration value="ERROR" />
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:element name="DocumentListRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dateFrom" type="xs:date" minOccurs="0" />
+				<xs:element name="dateTo" type="xs:date" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocumentListResponse">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="id" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 	<xs:element name="DocumentRequest">
 		<xs:complexType>
@@ -59,50 +75,34 @@
 
 	<xs:complexType name="Document">
 			<xs:sequence>
+				<xs:element name="title" type="xs:string" />
+				<xs:element name="fileGeneratedBy" type="xs:string" />
 				<xs:element name="documentType" type="vix:DocumentType" />
 				<xs:element name="vrm" type="xs:string" />
-				<xs:element name="declaration" type="vix:Declaration" />
-				<xs:element name="odometerReading" type="xs:integer" />
-				<xs:element name="dateOfInspection" type="xs:date"/>
+				<xs:element name="date" type="xs:date"/>
 				<xs:element name="fileName" type="xs:string"/>
-				<xs:element name="odometerReadingUnit" type="vix:DistanceUnit" />
-				<xs:element name="defectList" type="vix:Defect" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="file" type="xs:base64Binary"/>
+				<xs:element name="fields">
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="key" minOccurs="0" type="xs:string"/>
+										<xs:element name="value" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="Declaration">
-			<xs:sequence>
-				<xs:element name="madeByName" type="xs:string" />
-				<xs:element name="madeByPosition" type="xs:string" />
-				<xs:element name="date" type="xs:dateTime" />
-				<xs:element name="safeAndRoadworthyCondition" type="xs:boolean" />
-			</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="Defect">
-		<xs:sequence>
-			<xs:element name="type" type="vix:DefectType" />
-			<xs:element name="description" type="xs:string" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:simpleType name="DistanceUnit">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="KILOMETRE" />
-			<xs:enumeration value="MILE" />
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name="DefectType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="MINOR" />
-			<xs:enumeration value="MAJOR" />
-			<xs:enumeration value="DANGEROUS" />
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="DocumentType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="MOT" />
-			<xs:enumeration value="SIR" />
+			<xs:enumeration value="SAFETY_INSPECTION" />
 			<xs:enumeration value="OTHER" />
 		</xs:restriction>
 	</xs:simpleType>
