@@ -53,7 +53,7 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="Document">
+	<xs:complexType name="Document" abstract="true">
 			<xs:sequence>
 				<xs:element name="title" type="xs:string" />
 				<xs:element name="creator" type="xs:string" />

@@ -20,13 +20,10 @@ public class VixEndpoint {
     public DocumentResponse document(@RequestPayload DocumentRequest request) throws DatatypeConfigurationException {
         ObjectFactory f = new ObjectFactory();
         DocumentResponse response = f.createDocumentResponse();
-        Document document = f.createDocument();
-        SafetyInspection ext = new SafetyInspection();
-
+        SafetyInspection ext = f.createSafetyInspection();
         DocumentListResponse resp = new DocumentListResponse();
-
         ext.setTitle("Hello");
-       ext.setAllSectionsAreAnswered(true);
+        ext.setAllSectionsAreAnswered(true);
         response.setDocument(ext);
         return response;
     }
